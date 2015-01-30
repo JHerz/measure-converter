@@ -1,0 +1,50 @@
+body{
+    color:green;
+}
+
+img {
+    margin-top: 2em;
+}
+
+div{
+    text-align: center;
+}
+
+#first{
+    color:green;
+}
+
+input{
+    width:3.6em;
+    text-align: center;
+}
+
+#button{
+    margin-top: 1.6em;
+}
+
+button:focus {
+    outline: 0;
+}
+
+#main{
+    margin-top:3em;
+}
+
+.answer{
+    display:none;
+}
+button{
+    border-radius:6px;
+    height:2em;
+    width:4.6em;
+    font-size:14px;
+}  
+
+#mistake1{
+    color:red;
+}
+
+#mistake2{
+    color:red;
+}

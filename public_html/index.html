@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cooking Measurement Converter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="measure.css">
+    </head>
+    <body>
+        <div id="first"><h1 id="welcome">Welcome to the measurement converter!</h1>
+            <h2 id="handy">your handy-dandy kitchen companion</h2></div>
+        <div><img src="measure-cup_1.jpg"/></div>
+        <div id="main"><h3>I would like to convert &nbsp&nbsp <input type="text" placeholder="number"/>&nbsp &nbsp <select id="original">
+                    <option>tsp</option>
+                    <option>tbs</option>
+                    <option>oz</option>
+                    <option>cups</option>
+                    <option>quarts</option>
+                </select> &nbsp &nbsp
+                into &nbsp&nbsp <select id="into">
+                    <option>tsp</option>
+                    <option>tbs</option>
+                    <option>oz</option>
+                    <option>cups</option>
+                    <option>quarts</option>
+                </select></h3></div>
+        <div id="button"><button>submit</button></div>
+        <div id="result"></div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+        <script>
+            $(function() {
+                $('button').hover(function() {
+                    $('button').animate({color: "green",
+                        height: "2.5em",
+                        width: "5.1em",
+                        borderRadius: "8px"}, 100, "swing");
+                }, function() {
+                    $('button').animate({borderRadius: "21px",
+                        height: "2em",
+                        width: "4.6em",
+                        color: "black"});
+                }, 100, "swing").click(function() {
+                    if ($('#original option:selected').text() == 'tbs') {
+                        switch ($('#into option:selected').text()) {
+                            case "tsp":
+                                var result = tbsTsp($('input').val());
+                                break;
+                            case "cups":
+                                var result = tbsCup($('input').val());
+                                break;
+                            case "oz":
+                                var result = tbsOz($('input').val());
+                                break;
+                            case "quarts":
+                                var result = tbsQuart($('input').val());
+                                break;
+                        }
+                    }
+
+                    else if ($('#original option:selected').text() == 'tsp') {
+                        switch ($('#into option:selected').text()) {
+                            case "tbs":
+                                var result = tspTbs($('input').val());
+                                break;
+
+                            case "cups":
+                                var result = tspCup($('input').val());
+                                break;
+                            case "oz":
+                                var result = tspOz($('input').val());
+                                break;
+                            case "quarts":
+                                var result = tspQuart($('input').val());
+                                break;
+                        }
+                    }
+                    else if ($('#original option:selected').text() == 'quarts') {
+                        switch ($('#into option:selected').text()) {
+                            case "tsp":
+                                var result = quartsTsp($('input').val());
+                                break;
+                            case "cups":
+                                var result = quartsCup($('input').val());
+                                break;
+                            case "oz":
+                                var result = quartsOz($('input').val());
+                                break;
+                            case "tbs":
+                                var result = quartsTbs($('input').val());
+                                break;
+                        }
+                    }
+                    else if ($('#original option:selected').text() == 'oz') {
+                        switch ($('#into option:selected').text()) {
+                            case "tsp":
+                                var result = ozTsp($('input').val());
+                                break;
+                            case "cups":
+                                var result = ozCup($('input').val());
+                                break;
+                            case "tbs":
+                                var result = ozTbs($('input').val());
+                                break;
+                            case "quarts":
+                                var result = ozQuart($('input').val());
+                                break;
+                        }
+
+                        //  $("<h3>" + result + "</h3>").appendTo('#result');
+
+
+                    }
+
+                    else if ($('#original option:selected').text() == 'cups') {
+                        switch ($('#into option:selected').text()) {
+                            case "tsp":
+                                var result = cupTsp($('input').val());
+                                break;
+                            case "tbs":
+                                var result = cupTbs($('input').val());
+                                break;
+                            case "oz":
+                                var result = cupOz($('input').val());
+                                break;
+                            case "quarts":
+                                var result = cupQuart($('input').val());
+                                break;
+                        }
+                    }
+
+
+                    $('.answer').hide('size');
+                    if ($('input').val() == '' || $.isNumeric($('input').val()) == false) {
+                        $("<h2 class = 'answer' id='mistake1'>please enter a number!!</h2>").appendTo('#result').show("bounce").fadeOut(4000);
+
+                    }
+                    else if ($('#original option:selected').text() == $('#into option:selected').text()) {
+                        $("<h2 class = 'answer' id='mistake2'>you must select different measurement types!!</h2>").appendTo('#result').show("bounce").fadeOut(4000);
+
+                    }
+                    else {
+                        $("<div class='answer'><h1>" + $('input').val() + " " + $('#original option:selected').text() + " is equal to " + result.toFixed(1) + " " + $('#into option:selected').text() + "</h1></div>").appendTo('#result').show('size');
+                    }
+                });
+
+                function tspTbs(tsp) {
+                    tsp /= 3;
+                    return tsp;
+                }
+                ;
+                function tspCup(tsp) {
+                    tsp /= 48;
+                    return tsp;
+                }
+                ;
+                function tspQuart(tsp) {
+                    tsp /= 192;
+                    return tsp;
+                }
+                ;
+                function tspOz(tsp) {
+                    tsp /= 6;
+                    return tsp;
+
+                }
+                ;
+
+                function tbsTsp(tbs) {
+                    tbs *= 3;
+                    return tbs;
+                }
+                ;
+                function tbsCup(tbs) {
+                    tbs /= 16;
+                    return tbs;
+                }
+                ;
+                function tbsQuart(tbs) {
+                    tbs /= 64;
+                    return tbs;
+                }
+                ;
+                function tbsOz(tbs) {
+                    tbs /= 2;
+                    return tbs;
+                }
+                ;
+
+                function cupTsp(cup) {
+                    cup *= 16;
+                    return cup;
+                }
+                ;
+                function cupTbs(cup) {
+                    cup *= 16;
+                    return cup;
+                }
+                ;
+                function cupQuart(cup) {
+                    cup /= 4;
+                    return cup;
+                }
+                ;
+                function cupOz(cup) {
+                    cup *= 8;
+                    return cup;
+                }
+                ;
+                function quartsTbs(quart) {
+                    quart *= 64;
+                    return quart;
+                }
+                ;
+                function quartsTsp(quart) {
+                    quart *= 192;
+                    return quart;
+                }
+                ;
+                function quartsCup(quart) {
+                    quart *= 4;
+                    return quart;
+                }
+                ;
+                function quartsOz(quart) {
+                    quart *= 32;
+                    return quart;
+                }
+                ;
+
+                function ozTsp(oz) {
+                    oz *= 6;
+                    return oz;
+
+                }
+                ;
+                function ozTbs(oz) {
+                    oz *= 2;
+                    return oz;
+                }
+                ;
+                function ozCup(oz) {
+                    oz /= 8;
+                    return oz;
+                }
+                ;
+                function ozQuart(oz) {
+                    oz /= 32;
+                    return oz;
+                }
+                ;
+
+
+
+            });
+
+
+
+        </script>
+    </body>
+</html>
